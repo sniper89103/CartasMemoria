@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Juego de Memoria · Grupo Lucky</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <main class="juego">
+    <header class="cabecera">
+      <h1 class="titulo"><span>Juego de Memoria</span></h1>
+      <p class="subtitulo">¡Encuentra los pares! ♥</p>
+    </header>
+
+    <section class="marcador" aria-label="Marcador">
+      <div class="dato">
+        <span class="dato-valor" id="pares">0/0</span>
+        <span class="dato-nombre">Pares</span>
+      </div>
+
+      <div class="reloj" id="reloj" role="timer" aria-label="Tiempo restante">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="reloj-pista" cx="60" cy="60" r="52"></circle>
+          <circle class="reloj-progreso" id="progreso" cx="60" cy="60" r="52" pathLength="100"></circle>
+        </svg>
+        <div class="reloj-texto">
+          <span id="segundos">20</span>
+          <small>seg</small>
+        </div>
+      </div>
+
+      <div class="dato">
+        <span class="dato-valor" id="intentos">0</span>
+        <span class="dato-nombre">Intentos</span>
+      </div>
+    </section>
+
+    <p class="mensaje" id="mensaje" aria-live="polite"></p>
+
+    <section class="tablero" id="tablero" aria-label="Tablero de cartas"></section>
+
+    <footer class="acciones">
+      <button type="button" class="boton boton-suave" id="btn-reiniciar">Reiniciar</button>
+      <button type="button" class="boton boton-suave" id="btn-config">Configurar</button>
+    </footer>
+  </main>
+
+  <!-- Configuración: tiempo y cantidad de pares -->
+  <dialog id="dlg-config" aria-labelledby="config-titulo">
+    <form class="dialogo" id="form-config" method="dialog" novalidate>
+      <h2 class="dialogo-titulo" id="config-titulo">Prepara la partida</h2>
+
+      <div class="campo">
+        <label for="in-tiempo">Tiempo (segundos)</label>
+        <div class="stepper">
+          <button type="button" class="stepper-btn" data-objetivo="in-tiempo" data-paso="-5" aria-label="Restar 5 segundos">−</button>
+          <input type="number" id="in-tiempo" inputmode="numeric" autofocus>
+          <button type="button" class="stepper-btn" data-objetivo="in-tiempo" data-paso="5" aria-label="Sumar 5 segundos">+</button>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="in-pares">Pares de cartas</label>
+        <div class="stepper">
+          <button type="button" class="stepper-btn" data-objetivo="in-pares" data-paso="-1" aria-label="Quitar un par">−</button>
+          <input type="number" id="in-pares" inputmode="numeric">
+          <button type="button" class="stepper-btn" data-objetivo="in-pares" data-paso="1" aria-label="Agregar un par">+</button>
+        </div>
+      </div>
+
+      <p class="ayuda">El reloj arranca cuando volteas la primera carta.</p>
+
+      <button type="submit" class="boton">Jugar</button>
+    </form>
+  </dialog>
+
+  <!-- Resultado de la partida -->
+  <dialog id="dlg-fin" aria-labelledby="fin-titulo">
+    <div class="dialogo">
+      <h2 class="dialogo-titulo" id="fin-titulo"></h2>
+      <p class="dialogo-texto" id="fin-texto"></p>
+      <div class="dialogo-acciones">
+        <button type="button" class="boton" id="btn-otra">Jugar de nuevo</button>
+        <button type="button" class="boton boton-suave" id="btn-ajustes">Cambiar ajustes</button>
+      </div>
+    </div>
+    <div class="confeti" id="confeti" aria-hidden="true"></div>
+  </dialog>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
